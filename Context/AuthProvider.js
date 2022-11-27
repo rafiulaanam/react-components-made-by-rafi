@@ -1,7 +1,4 @@
-
-//add it in the App.js file
-<RouterProvider router={router}></RouterProvider>
-
+// add--------- <AuthProvider></AuthProvider>---------- in index.js file
 
 import React, { createContext, useEffect, useState } from "react";
 import {
@@ -14,7 +11,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import app from "../../Firebase/firebase.config";
+
 
 export const AuthContext = createContext();
 

@@ -16,7 +16,7 @@ import {
 
 
 // set it in you components
-
+import {useQuery} from '@tanstack/react-query'
 
 const url = `http://localhost:5000/bookings?email=${user?.email}`
 
