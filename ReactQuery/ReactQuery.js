@@ -3,7 +3,7 @@
 import {
     QueryClient,
     QueryClientProvider,
-  } from '@tanstack/react-query'
+  } from 'react-query'
 
   const queryClient = new QueryClient()
 
@@ -16,7 +16,7 @@ import {
 
 
 // set it in you components
-import {useQuery} from '@tanstack/react-query'
+import {useQuery} from 'react-query'
 
 const url = `http://localhost:5000/bookings?email=${user?.email}`
 
