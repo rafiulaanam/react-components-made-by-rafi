@@ -1,9 +1,9 @@
-// add--------- <AuthProvider></AuthProvider>---------- in index.js file
-
 import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
+  FacebookAuthProvider,
   getAuth,
+  GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -11,6 +11,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import app from "../Firebase/firebase.config";
 
 
 export const AuthContext = createContext();
@@ -20,23 +21,46 @@ const AuthProvider = ({ children }) => {
 
   const [user, setUser] = useState(null);
 
-  const googleProvider = new GoogleAuthProvider();
 
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
+
+
+// Google SignUp
   const continueWithGoogle = () => {
     return signInWithPopup(auth, googleProvider);
   };
 
+// Github SignUp
+  const continueWithGithub = () => {
+    return signInWithPopup(auth, githubProvider);
+  };
+
+
+// Github SignUp
+  const continueWithFacebook = () => {
+    return signInWithPopup(auth, facebookProvider);
+  };
+
+
+
+  // Email SignUp  
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+   // Email Login  
   const loginUser = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
+
+  // Update User
   const updateUser = (userInfo) => {
     return updateProfile(auth.currentUser, userInfo);
   };
 
+  // Logout User
   const logoutUser = () => {
     return signOut(auth);
   };
@@ -53,6 +77,8 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     continueWithGoogle,
+    continueWithGithub,
+    continueWithFacebook,
     createUser,
     loginUser,
     updateUser,
