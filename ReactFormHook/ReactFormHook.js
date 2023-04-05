@@ -12,7 +12,7 @@ const handleRegister = data=>{
    
 }
 
-onSubmit={()=>handleSubmit(handleRegister)}
+onSubmit={handleSubmit(handleRegister)}
 
 
 {...register("example")}
