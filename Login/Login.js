@@ -1,11 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebookF } from "react-icons/fa";
 import { BsGoogle, BsGithub } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation()
+
+  const from = location.state?.from?.pathname || "/"
 
   const [userError, setUserError] = useState("")
 console.log(userError)
@@ -29,9 +33,12 @@ console.log(userError)
     const form = event.target;
 
     loginUser(data.email, data.password)
-      .then(() => {
+      .then((result) => {
         form.reset();
+      if(result){
 
+        navigate(from, {replace:true})
+      }
         // toast.success("Login Successfully");
      
       })
@@ -49,6 +56,8 @@ console.log(userError)
     continueWithGoogle()
       .then((result) => {
         const user = result.user;
+    
+        navigate(from, {replace:true})
         console.log(user);
       })
       .catch((e) => console.log(e));
@@ -57,6 +66,8 @@ console.log(userError)
     continueWithFacebook()
       .then((result) => {
         const user = result.user;
+      
+        navigate(from, {replace:true})
         console.log(user);
       })
       .catch((e) => console.log(e));
@@ -65,6 +76,8 @@ console.log(userError)
     continueWithGithub()
       .then((result) => { 
         const user = result.user;
+    
+        navigate(from, {replace:true})
         console.log(user);
       })
       .catch((e) => console.log(e));

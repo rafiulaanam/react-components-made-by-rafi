@@ -1,15 +1,17 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaFacebookF } from "react-icons/fa";
 import { BsGoogle, BsGithub } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const Signup = () => {
+  const navigate = useNavigate();
 
 
   // Import from AuthProvide
   const {
+
     continueWithGoogle,
     continueWithGithub,
     continueWithFacebook,
@@ -41,7 +43,10 @@ const Signup = () => {
           displayName: data.firstName +" "+ data.lastName,
         };
         updateUser(userInfo)
-          .then(() => { })
+          .then(() => { 
+           
+            navigate('/')
+          })
           .catch((e) => console.log(e));
 
         // toast.success("Register Successfully");
@@ -53,6 +58,8 @@ const Signup = () => {
     continueWithGoogle()
       .then((result) => {
         const user = result.user;
+       
+        navigate('/')
         console.log(user);
       })
       .catch((e) => console.log(e));
@@ -61,6 +68,8 @@ const Signup = () => {
     continueWithFacebook()
       .then((result) => {
         const user = result.user;
+    
+        navigate('/')
         console.log(user);
       })
       .catch((e) => console.log(e));
@@ -69,6 +78,8 @@ const Signup = () => {
     continueWithGithub()
       .then((result) => { 
         const user = result.user;
+     
+        navigate('/')
         console.log(user);
       })
       .catch((e) => console.log(e));
